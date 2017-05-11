@@ -16,13 +16,10 @@ namespace AppEF
 
         public DbSet<CategoriaEstabelecimento> CategoriasEstabelecimentos { get; set; }
 
-        /*protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            Database.SetInitializer<DatabaseContext>(new DropCreateDatabaseIfModelChanges<DatabaseContext>());
-        }*/
-
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            Database.SetInitializer(new CreateDatabaseIfNotExists<DatabaseContext>());
+
             modelBuilder.Configurations.Add(new CategoriaMap());
 
             base.OnModelCreating(modelBuilder);
